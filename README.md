@@ -54,6 +54,7 @@ ViewPager를 이용하여 Frament 전환이 가능한 앱 개발
 
 ## 4. 우대 사항
 
+- MVVM, MVP와 같은 디자인 패턴 적용
 - RxJava 혹은 Kotlin Coroutine 사용
 - Dependency Injection 적용
 - Android Clean Architecture 적용
