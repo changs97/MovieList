@@ -8,6 +8,8 @@ import com.changs.movielist.R
 import com.changs.movielist.config.ApplicationClass
 import com.changs.movielist.config.BaseActivity
 import com.changs.movielist.data.Films
+import com.changs.movielist.data.FilmsModel
+import com.changs.movielist.data.FilmsModelItem
 import com.changs.movielist.data.Webservice
 import com.changs.movielist.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -19,14 +21,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     companion object {
         lateinit var viewModel: MainViewModel
-        lateinit var filmsList: ArrayList<Films>
+        lateinit var filmsCheckList: List<Films>
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getAllFilms()?.observe(this ,{
-            filmsList = it
+            filmsCheckList = it
+            Log.d("getAllFilms()","성공")
         })
 
 
@@ -68,6 +71,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
     }
+
+
 
 
 
