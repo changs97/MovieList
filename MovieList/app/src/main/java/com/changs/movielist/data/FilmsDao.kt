@@ -9,11 +9,11 @@ interface FilmsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFilms(films: Films)
 
-    @Delete
+    @Query("DELETE FROM films WHERE title = :title")
     fun deleteFilms(title: String)
 
     @Query("SELECT * FROM films")
-    fun getAllFilms(): LiveData<ArrayList<Films>>
+    fun getAllFilms(): LiveData<List<Films>>
 
 
 }
