@@ -9,11 +9,14 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.changs.movielist.R
 import com.changs.movielist.data.Films
+import com.changs.movielist.data.FilmsModel
+import com.changs.movielist.data.FilmsModelItem
 import com.google.android.material.snackbar.Snackbar
 
-class RecyclerViewAdapter(private val dataList : ArrayList<Films>, private val fragmentType : Int): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>, private val fragmentType : Int): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -22,9 +25,19 @@ class RecyclerViewAdapter(private val dataList : ArrayList<Films>, private val f
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        holder.itemTitle.text = dataList[position].title
+        holder.itemScore.text = dataList[position].rt_score
+        holder.itemDirectorName.text = dataList[position].director
+        holder.itemDetail.text = dataList[position].description
+
+        Glide.with(holder.itemView.getContext())
+            .load(dataList[position].image).centerCrop()
+            .into(holder.itemImage)
+
         //여기서 바인드
         when(fragmentType) {
-            1 -> {}
+            1 -> {
+            }
             2 -> {}
             3 -> {}
             else -> {}
