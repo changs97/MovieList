@@ -10,7 +10,7 @@ import com.changs.movielist.data.FilmsRepository
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: FilmsRepository = FilmsRepository(application)
-    private val allFilms: LiveData<ArrayList<Films>>?
+    private val allFilms: LiveData<List<Films>>?
 
     init {
         allFilms = repository.allFilms
@@ -25,7 +25,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun getAllFilms(): LiveData<ArrayList<Films>>? {
+    fun getAllFilms(): LiveData<List<Films>>? {
         return allFilms
     }
 }
