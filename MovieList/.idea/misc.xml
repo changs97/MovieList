@@ -4,9 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/layout/fragment_center.xml" value="0.12083333333333333" />
+        <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/layout/fragment_center.xml" value="0.264" />
         <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/layout/fragment_left.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/layout/fragment_right.xml" value="0.24114583333333334" />
+        <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/layout/list_item.xml" value="0.264" />
         <entry key="..\:/Users/pck49/Desktop/7th-aos-quest/7th-aos-quest/MovieList/app/src/main/res/menu/menu.xml" value="0.24114583333333334" />
       </map>
     </option>
