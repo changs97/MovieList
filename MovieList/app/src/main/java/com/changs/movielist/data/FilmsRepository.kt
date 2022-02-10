@@ -11,7 +11,7 @@ class FilmsRepository(application: Application) {
     private var filmsDao: FilmsDao?
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    val allFilms: LiveData<ArrayList<Films>>?
+    val allFilms: LiveData<List<Films>>?
 
     init {
         val db: FilmsRoomDatabase? =
