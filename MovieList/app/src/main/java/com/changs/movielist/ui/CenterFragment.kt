@@ -16,8 +16,8 @@ class CenterFragment :  BaseFragment<FragmentCenterBinding>(FragmentCenterBindin
         centerRecyclerSetUp()
     }
     private fun centerRecyclerSetUp() {
-        val titleSortedFilmsList = SplashActivity.filmsList.sortedByDescending{ it.title }
-        adapter = RecyclerViewAdapter(titleSortedFilmsList, 2)
+        val titleSortedFilmsList = SplashActivity.filmsList.sortedByDescending{ it.title }.reversed()
+        adapter = RecyclerViewAdapter(titleSortedFilmsList)
         binding.centerFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.centerFragmentRecyclerView.adapter = adapter
     }
