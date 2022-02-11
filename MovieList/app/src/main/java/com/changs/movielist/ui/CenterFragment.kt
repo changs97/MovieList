@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.changs.movielist.R
 import com.changs.movielist.config.BaseFragment
+import com.changs.movielist.data.FilmsModelItem
 import com.changs.movielist.databinding.FragmentCenterBinding
 
 
@@ -17,7 +18,8 @@ class CenterFragment :  BaseFragment<FragmentCenterBinding>(FragmentCenterBindin
     }
     private fun centerRecyclerSetUp() {
         val titleSortedFilmsList = SplashActivity.filmsList.sortedByDescending{ it.title }.reversed()
-        adapter = RecyclerViewAdapter(titleSortedFilmsList)
+        val titleSortedFilmsArrayList = ArrayList(titleSortedFilmsList)
+        adapter = RecyclerViewAdapter(titleSortedFilmsArrayList)
         binding.centerFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.centerFragmentRecyclerView.adapter = adapter
     }
