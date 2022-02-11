@@ -1,13 +1,15 @@
 package com.changs.movielist.ui
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.core.content.ContextCompat
+import com.changs.movielist.R
 import com.changs.movielist.config.ApplicationClass
 import com.changs.movielist.config.BaseActivity
-import com.changs.movielist.data.Films
 import com.changs.movielist.data.FilmsModel
 import com.changs.movielist.data.FilmsModelItem
 import com.changs.movielist.data.Webservice
@@ -24,6 +26,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         tryGetFilms()
 
         Handler(Looper.getMainLooper()).postDelayed({
@@ -32,7 +36,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             startActivity(intent)
             finish()
 
-        }, 2000)
+        }, 3000)
 
 
     }
