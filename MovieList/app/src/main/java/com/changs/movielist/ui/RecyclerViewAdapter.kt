@@ -24,6 +24,7 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
         return ViewHolder(v)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemTitle.text = dataList[position].title
@@ -50,22 +51,19 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
         positionCheck = holder.adapterPosition
 
 
-
-        holder.itemExpandBtn.setOnClickListener {
-            if(!holder.isExpanded){
-                holder.itemDetail.visibility = VISIBLE
-                holder.isExpanded  = true
-                Glide.with(holder.itemView.getContext())
-                    .load(R.drawable.ic_baseline_expand_less_24)
-                    .into(holder.itemExpandBtn)
-            }else{
-                holder.isExpanded  = false
-                holder.itemDetail.visibility = GONE
-                Glide.with(holder.itemView.getContext())
-                    .load(R.drawable.ic_baseline_expand_more_24)
-                    .into(holder.itemExpandBtn)
-            }
+        if(dataList[position].checked){
+            holder.itemDetail.visibility = VISIBLE
+            Glide.with(holder.itemView.getContext())
+                .load(R.drawable.ic_baseline_expand_less_24)
+                .into(holder.itemExpandBtn)
+        }else{
+            holder.itemDetail.visibility = GONE
+            Glide.with(holder.itemView.getContext())
+                .load(R.drawable.ic_baseline_expand_more_24)
+                .into(holder.itemExpandBtn)
         }
+
+
 
 
 
@@ -84,7 +82,6 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
         val itemScore : TextView
         val itemDirectorName : TextView
         val itemExpandBtn : ImageButton
-        var isExpanded : Boolean
 
         init {
             itemImage = itemView.findViewById(R.id.item_image)
@@ -93,7 +90,21 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
             itemScore = itemView.findViewById(R.id.item_score)
             itemDirectorName = itemView.findViewById(R.id.item_directorName)
             itemExpandBtn = itemView.findViewById(R.id.item_expand_btn)
-            isExpanded  = false
+
+            itemExpandBtn.setOnClickListener {
+                dataList[adapterPosition].checked = !dataList[adapterPosition].checked
+
+                if(dataList[adapterPosition].checked){
+                    itemDetail.visibility = VISIBLE
+                    Glide.with(itemView.getContext())
+                        .load(R.drawable.ic_baseline_expand_less_24)
+                        .into(itemExpandBtn)
+                }else{
+                    itemDetail.visibility = GONE
+                    Glide.with(itemView.getContext())
+                        .load(R.drawable.ic_baseline_expand_more_24)
+                        .into(itemExpandBtn) }
+            }
 
         }
 
