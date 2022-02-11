@@ -3,15 +3,14 @@
     <item
         android:id="@+id/menu1"
         android:enabled="true"
-        android:title="메뉴1"/>
+        android:icon="@drawable/free_icon_film"
+        android:title="Ranking"/>
 
     <item
         android:id="@+id/menu2"
         android:enabled="true"
-        android:title="메뉴2"/>
+        android:icon="@drawable/free_icon_apps_sort1"
+        android:title="Sort by title"/>
 
-    <item
-        android:id="@+id/menu3"
-        android:enabled="true"
-        android:title="메뉴3"/>
+
 </menu>
