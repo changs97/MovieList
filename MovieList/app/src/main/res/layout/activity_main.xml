@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
+    android:background="@color/black"
     tools:context=".ui.MainActivity">
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -18,6 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/menu"
+        app:itemIconTint="@drawable/menu_selector_color"
+        app:itemTextColor="@drawable/menu_selector_color"
+        android:background="#2C2E43"
         />
 
 
