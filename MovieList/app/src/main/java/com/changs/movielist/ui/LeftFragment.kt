@@ -21,7 +21,7 @@ class LeftFragment :  BaseFragment<FragmentLeftBinding>(FragmentLeftBinding::bin
 
     private fun leftRecyclerSetUp() {
         val scoreSortedFilmsList = SplashActivity.filmsList.sortedByDescending{ it.rt_score }
-        adapter = RecyclerViewAdapter(scoreSortedFilmsList, 1)
+        adapter = RecyclerViewAdapter(scoreSortedFilmsList)
         binding.leftFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.leftFragmentRecyclerView.adapter = adapter
     }
