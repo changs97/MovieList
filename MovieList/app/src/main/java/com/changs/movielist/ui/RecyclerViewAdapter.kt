@@ -1,8 +1,9 @@
 package com.changs.movielist.ui
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
@@ -11,12 +12,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.changs.movielist.R
-import com.changs.movielist.data.Films
-import com.changs.movielist.data.FilmsModel
 import com.changs.movielist.data.FilmsModelItem
-import com.google.android.material.snackbar.Snackbar
 
-class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>, private val fragmentType : Int): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+    private var positionCheck = 0
+    private var isStartViewCheck = true
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -31,20 +32,42 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>, private v
         holder.itemDetail.text = dataList[position].description
 
         Glide.with(holder.itemView.getContext())
-            .load(dataList[position].image).centerCrop()
+            .load(dataList[position].image)
             .into(holder.itemImage)
 
-        //여기서 바인드
-        when(fragmentType) {
-            1 -> {
+
+        val animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_to_left)
+
+        if (isStartViewCheck) {
+            if (holder.adapterPosition > 5) isStartViewCheck = false
+        } else {
+            if (holder.adapterPosition > positionCheck) {
+                holder.itemView.animation = animation
+            } else {
+                holder.itemView.animation = null
             }
-            2 -> {}
-            3 -> {}
-            else -> {}
+        }
+        positionCheck = holder.adapterPosition
+
+
+
+        holder.itemExpandBtn.setOnClickListener {
+            if(!holder.isExpanded){
+                holder.itemDetail.visibility = VISIBLE
+                holder.isExpanded  = true
+                Glide.with(holder.itemView.getContext())
+                    .load(R.drawable.ic_baseline_expand_less_24)
+                    .into(holder.itemExpandBtn)
+            }else{
+                holder.isExpanded  = false
+                holder.itemDetail.visibility = GONE
+                Glide.with(holder.itemView.getContext())
+                    .load(R.drawable.ic_baseline_expand_more_24)
+                    .into(holder.itemExpandBtn)
+            }
         }
 
-/*        val animation = AnimationUtils.loadAnimation(MainActivity() as Context, R.anim.slide_in_to_left)
-        holder.itemView.animation = animation*/
+
 
 
     }
@@ -53,13 +76,15 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>, private v
         return dataList.size
     }
 
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage : ImageView
         val itemTitle : TextView
         val itemDetail : TextView
         val itemScore : TextView
         val itemDirectorName : TextView
-        val itemBtn : ImageButton
+        val itemExpandBtn : ImageButton
+        var isExpanded : Boolean
 
         init {
             itemImage = itemView.findViewById(R.id.item_image)
@@ -67,16 +92,9 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>, private v
             itemDetail = itemView.findViewById(R.id.item_content)
             itemScore = itemView.findViewById(R.id.item_score)
             itemDirectorName = itemView.findViewById(R.id.item_directorName)
-            itemBtn = itemView.findViewById(R.id.item_btn)
+            itemExpandBtn = itemView.findViewById(R.id.item_expand_btn)
+            isExpanded  = false
 
-            itemBtn.setOnClickListener{ v: View ->
-                val position : Int = adapterPosition
-
-                //여기서 즐겨찾기 기능 액션
-
-                Snackbar.make(v, "Click detected on item $position",
-                    Snackbar.LENGTH_LONG).setAction("Action", null).show()
-            }
         }
 
     }
