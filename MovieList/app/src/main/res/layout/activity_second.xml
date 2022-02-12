@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#595260"
     android:padding="10dp"
-    tools:context=".ui.SecondActivity">
+    tools:context=".ui.activity.SecondActivity">
 
     <ImageView
         android:transitionName="imageTransition"
