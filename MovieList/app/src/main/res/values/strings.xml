@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MovieList</string>
+    <string name="app_name">Movies</string>
+    <string name="title">TITLE</string>
+    <string name="director">DIRECTOR</string>
+    <string name="directorname">directorName</string>
+    <string name="score">SCORE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="scenario">SCENARIO</string>
+    <string name="release">RELEASE</string>
+    <string name="time">TIME</string>
 </resources>
