@@ -1,5 +1,7 @@
 package com.changs.movielist.ui
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -13,6 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.changs.movielist.R
 import com.changs.movielist.data.FilmsModelItem
+import android.util.Pair
+import android.app.Activity
+
+
+
 
 class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private var positionCheck = 0
@@ -104,6 +111,20 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
                     Glide.with(itemView.getContext())
                         .load(R.drawable.ic_baseline_expand_more_24)
                         .into(itemExpandBtn) }
+            }
+
+            itemView.setOnLongClickListener {
+                val intent = Intent(itemView.context, SecondActivity::class.java)
+
+                val options : ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                    itemView.context as Activity,
+                    Pair.create(itemTitle, "titleTransition"),
+                    Pair.create(itemImage, "imageTransition")
+                )
+                intent.putExtra("SecondActivity",dataList[adapterPosition])
+                itemView.context.startActivity(intent, options.toBundle())
+
+                true
             }
 
         }
