@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
-                        android:text="TITLE"
+                        android:text="@string/title"
                         android:textColor="#FFD523"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -68,14 +68,14 @@
                         android:textColor="#B2B1B9"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="DIRECTOR"
+                        android:text="@string/director"
                         />
 
                     <TextView
                         android:textSize="12sp"
                         android:textColor="#2C2E43"
                         android:id="@+id/item_directorName"
-                        android:text="directorName"
+                        android:text="@string/directorname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -90,7 +90,7 @@
                         android:textColor="#B2B1B9"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:text="SCORE" />
+                        android:text="@string/score" />
 
                     <TextView
                         android:id="@+id/item_score"
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
-                        android:text="DESCRIPTION"
+                        android:text="@string/description"
                         android:textColor="#B2B1B9"
                         android:textSize="12sp"
                         android:textStyle="bold" />
