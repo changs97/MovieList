@@ -36,7 +36,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
             startActivity(intent)
             finish()
 
-        }, 3000)
+        }, 4000)
 
 
     }
