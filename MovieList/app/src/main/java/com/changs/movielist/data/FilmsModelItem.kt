@@ -1,7 +1,7 @@
 package com.changs.movielist.data
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
+import java.io.Serializable
+
 
 data class FilmsModelItem (
     var id: String,
@@ -22,4 +22,4 @@ data class FilmsModelItem (
     val url: String,
     val vehicles: List<String>,
     var checked : Boolean = false
-)
+) : Serializable
