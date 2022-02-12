@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TITLE"
+            android:text="@string/title"
             android:textColor="#FFD523"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -44,7 +44,7 @@
             android:textColor="#B2B1B9"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="DIRECTOR"
+            android:text="@string/director"
             />
 
         <TextView
@@ -67,7 +67,7 @@
             android:textColor="#B2B1B9"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="SCORE" />
+            android:text="@string/score" />
 
         <TextView
             android:id="@+id/second_score"
@@ -89,7 +89,7 @@
             android:textColor="#B2B1B9"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="SCENARIO" />
+            android:text="@string/scenario" />
 
         <TextView
             android:id="@+id/second_scenario"
@@ -111,7 +111,7 @@
             android:textColor="#B2B1B9"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="TIME" />
+            android:text="@string/time" />
 
         <TextView
             android:id="@+id/second_running_time"
@@ -133,7 +133,7 @@
             android:textColor="#B2B1B9"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="RELEASE" />
+            android:text="@string/release" />
 
         <TextView
             android:id="@+id/second_release_date"
@@ -150,7 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="DESCRIPTION"
+        android:text="@string/description"
         android:textColor="#B2B1B9"
         android:textSize="15sp"
         android:textStyle="bold" />
