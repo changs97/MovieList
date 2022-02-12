@@ -23,7 +23,7 @@ import com.changs.movielist.ui.fragment.UpdateInterface
 import com.google.android.material.snackbar.Snackbar
 
 
-class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private var positionCheck = 0
     private var isStartViewCheck = true
 
@@ -124,8 +124,6 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
                     Glide.with(itemView.getContext())
                         .load(R.drawable.ic_baseline_star_24)
                         .into(itemFavoriteBtn) }
-
-
             }
 
 
