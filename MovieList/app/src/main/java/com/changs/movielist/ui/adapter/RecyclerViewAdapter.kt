@@ -17,13 +17,16 @@ import com.changs.movielist.R
 import com.changs.movielist.data.model.FilmsModelItem
 import android.util.Pair
 import android.app.Activity
+import android.util.Log
 import com.changs.movielist.ui.activity.SecondActivity
+import com.changs.movielist.ui.fragment.UpdateInterface
 import com.google.android.material.snackbar.Snackbar
 
 
 class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private var positionCheck = 0
     private var isStartViewCheck = true
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +36,6 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         holder.itemTitle.text = dataList[position].title
         holder.itemScore.text = dataList[position].rt_score
         holder.itemDirectorName.text = dataList[position].director
@@ -71,6 +73,17 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
         }
 
 
+        if(dataList[position].checked2){
+            Glide.with(holder.itemView.getContext())
+                .load(R.drawable.ic_baseline_star2_24)
+                .into(holder.itemFavoriteBtn)
+        }else{
+            Glide.with(holder.itemView.getContext())
+                .load(R.drawable.ic_baseline_star_24)
+                .into(holder.itemFavoriteBtn)
+        }
+
+
 
 
 
@@ -89,6 +102,7 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
         val itemScore : TextView
         val itemDirectorName : TextView
         val itemExpandBtn : ImageButton
+        val itemFavoriteBtn : ImageButton
 
         init {
             itemImage = itemView.findViewById(R.id.item_image)
@@ -97,6 +111,23 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
             itemScore = itemView.findViewById(R.id.item_score)
             itemDirectorName = itemView.findViewById(R.id.item_directorName)
             itemExpandBtn = itemView.findViewById(R.id.item_expand_btn)
+            itemFavoriteBtn = itemView.findViewById(R.id.item_favorite)
+
+            itemFavoriteBtn.setOnClickListener {
+                dataList[adapterPosition].checked2 = !dataList[adapterPosition].checked2
+
+                if(dataList[adapterPosition].checked2){
+                    Glide.with(itemView.getContext())
+                        .load(R.drawable.ic_baseline_star2_24)
+                        .into(itemFavoriteBtn)
+                }else{
+                    Glide.with(itemView.getContext())
+                        .load(R.drawable.ic_baseline_star_24)
+                        .into(itemFavoriteBtn) }
+
+
+            }
+
 
             itemExpandBtn.setOnClickListener {
                 dataList[adapterPosition].checked = !dataList[adapterPosition].checked
@@ -111,6 +142,8 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
                     Glide.with(itemView.getContext())
                         .load(R.drawable.ic_baseline_expand_more_24)
                         .into(itemExpandBtn) }
+
+
             }
 
             itemView.setOnLongClickListener {
@@ -137,4 +170,6 @@ class RecyclerViewAdapter(private val dataList : List<FilmsModelItem>): Recycler
         }
 
     }
+
+
 }

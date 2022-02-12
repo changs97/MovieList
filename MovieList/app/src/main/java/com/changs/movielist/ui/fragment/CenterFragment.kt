@@ -1,6 +1,7 @@
 package com.changs.movielist.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.changs.movielist.R
@@ -11,7 +12,7 @@ import com.changs.movielist.ui.adapter.RecyclerViewAdapter
 
 
 class CenterFragment :  BaseFragment<FragmentCenterBinding>(FragmentCenterBinding::bind, R.layout.fragment_center) {
-    private var adapter : RecyclerViewAdapter? = null
+    private lateinit var adapter : RecyclerViewAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -24,4 +25,5 @@ class CenterFragment :  BaseFragment<FragmentCenterBinding>(FragmentCenterBindin
         binding.centerFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.centerFragmentRecyclerView.adapter = adapter
     }
+
 }

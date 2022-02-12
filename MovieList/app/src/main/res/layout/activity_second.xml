@@ -9,6 +9,14 @@
     android:padding="10dp"
     tools:context=".ui.activity.SecondActivity">
 
+    <ImageButton
+        android:id="@+id/second_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_star_24" />
+
     <ImageView
         android:transitionName="imageTransition"
         android:id="@+id/second_image"

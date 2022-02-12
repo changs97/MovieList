@@ -1,10 +1,12 @@
 package com.changs.movielist.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.changs.movielist.R
 import com.changs.movielist.config.BaseActivity
 import com.changs.movielist.databinding.ActivityMainBinding
+import com.changs.movielist.ui.adapter.RecyclerViewAdapter
 import com.changs.movielist.ui.adapter.ViewPagerAdapter
 
 
@@ -36,6 +38,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 R.id.menu2 -> {
                     // ViewPager의 현재 item에 두 번째 화면을 대입
                     binding.viewPager.currentItem = 1
+
+                    return@setOnItemSelectedListener true
+                }
+                R.id.menu3 -> {
+                    // ViewPager의 현재 item에 세 번째 화면을 대입
+                    binding.viewPager.currentItem = 2
                     return@setOnItemSelectedListener true
                 }
                 else -> {
