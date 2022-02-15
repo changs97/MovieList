@@ -10,10 +10,11 @@ import com.changs.movielist.data.model.FilmsModelItem
 import com.changs.movielist.databinding.FragmentRightBinding
 import com.changs.movielist.ui.activity.SplashActivity
 import com.changs.movielist.ui.adapter.RecyclerViewAdapter
+
 import java.util.ArrayList
 
 class RightFragment  :  BaseFragment<FragmentRightBinding>(FragmentRightBinding::bind, R.layout.fragment_right) {
-    private lateinit var adapter : RecyclerViewAdapter
+    private lateinit var RightAdapter : RecyclerViewAdapter
     private lateinit var FavoritesFilmsArrayList : ArrayList<FilmsModelItem>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,16 +27,16 @@ class RightFragment  :  BaseFragment<FragmentRightBinding>(FragmentRightBinding:
     private fun leftRecyclerSetUp() {
         FavoritesFilmsArrayList = SplashActivity.filmsList
         val updatedList = updateList(FavoritesFilmsArrayList)
-        adapter = RecyclerViewAdapter(updatedList)
+        RightAdapter = RecyclerViewAdapter(updatedList,3)
         binding.rightFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.rightFragmentRecyclerView.adapter = adapter
+        binding.rightFragmentRecyclerView.adapter = RightAdapter
     }
 
     private fun updateList(Films: ArrayList<FilmsModelItem>) : ArrayList<FilmsModelItem> {
         val updatedList : ArrayList<FilmsModelItem> = arrayListOf()
         if(Films.isNotEmpty()){
             for(data in FavoritesFilmsArrayList){
-                if(data.checked2) updatedList.add(data)
+                if(data.checked) updatedList.add(data)
             }
         }
         return updatedList
