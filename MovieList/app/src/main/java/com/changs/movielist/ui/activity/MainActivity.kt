@@ -38,7 +38,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 R.id.menu2 -> {
                     // ViewPager의 현재 item에 두 번째 화면을 대입
                     binding.viewPager.currentItem = 1
-
                     return@setOnItemSelectedListener true
                 }
                 R.id.menu3 -> {
