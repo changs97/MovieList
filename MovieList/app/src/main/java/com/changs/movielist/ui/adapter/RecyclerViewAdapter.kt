@@ -23,9 +23,10 @@ import com.changs.movielist.ui.fragment.UpdateInterface
 import com.google.android.material.snackbar.Snackbar
 
 
-class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>, val viewType : Int): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     private var positionCheck = 0
     private var isStartViewCheck = true
+
 
 
 
@@ -60,20 +61,9 @@ class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): Rec
         positionCheck = holder.adapterPosition
 
 
+
         if(dataList[position].checked){
-            holder.itemDetail.visibility = VISIBLE
-            Glide.with(holder.itemView.getContext())
-                .load(R.drawable.ic_baseline_expand_less_24)
-                .into(holder.itemExpandBtn)
-        }else{
-            holder.itemDetail.visibility = GONE
-            Glide.with(holder.itemView.getContext())
-                .load(R.drawable.ic_baseline_expand_more_24)
-                .into(holder.itemExpandBtn)
-        }
-
-
-        if(dataList[position].checked2){
+            Log.d("테스트","${dataList[position].checked} + $viewType " )
             Glide.with(holder.itemView.getContext())
                 .load(R.drawable.ic_baseline_star2_24)
                 .into(holder.itemFavoriteBtn)
@@ -82,6 +72,11 @@ class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): Rec
                 .load(R.drawable.ic_baseline_star_24)
                 .into(holder.itemFavoriteBtn)
         }
+
+        holder.itemDetail.visibility = GONE
+        Glide.with(holder.itemView.getContext())
+            .load(R.drawable.ic_baseline_expand_more_24)
+            .into(holder.itemExpandBtn)
 
 
 
@@ -114,9 +109,9 @@ class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): Rec
             itemFavoriteBtn = itemView.findViewById(R.id.item_favorite)
 
             itemFavoriteBtn.setOnClickListener {
-                dataList[adapterPosition].checked2 = !dataList[adapterPosition].checked2
+                dataList[adapterPosition].checked = !dataList[adapterPosition].checked
 
-                if(dataList[adapterPosition].checked2){
+                if(dataList[adapterPosition].checked){
                     Glide.with(itemView.getContext())
                         .load(R.drawable.ic_baseline_star2_24)
                         .into(itemFavoriteBtn)
@@ -128,9 +123,7 @@ class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): Rec
 
 
             itemExpandBtn.setOnClickListener {
-                dataList[adapterPosition].checked = !dataList[adapterPosition].checked
-
-                if(dataList[adapterPosition].checked){
+                if(itemDetail.visibility == GONE){
                     itemDetail.visibility = VISIBLE
                     Glide.with(itemView.getContext())
                         .load(R.drawable.ic_baseline_expand_less_24)
@@ -140,8 +133,6 @@ class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>): Rec
                     Glide.with(itemView.getContext())
                         .load(R.drawable.ic_baseline_expand_more_24)
                         .into(itemExpandBtn) }
-
-
             }
 
             itemView.setOnLongClickListener {
