@@ -14,7 +14,7 @@ import java.util.ArrayList
 
 
 class LeftFragment :  BaseFragment<FragmentLeftBinding>(FragmentLeftBinding::bind, R.layout.fragment_left) {
-    private lateinit var adapter : RecyclerViewAdapter
+    private lateinit var leftAdapter : RecyclerViewAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -25,10 +25,9 @@ class LeftFragment :  BaseFragment<FragmentLeftBinding>(FragmentLeftBinding::bin
     private fun leftRecyclerSetUp() {
         val scoreSortedFilmsList = SplashActivity.filmsList.sortedByDescending{ it.rt_score }
         val scoreSortedFilmsArrayList = ArrayList(scoreSortedFilmsList)
-
-        adapter = RecyclerViewAdapter(scoreSortedFilmsArrayList)
+        leftAdapter = RecyclerViewAdapter(scoreSortedFilmsArrayList,1)
         binding.leftFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.leftFragmentRecyclerView.adapter = adapter
+        binding.leftFragmentRecyclerView.adapter = leftAdapter
     }
 
 
