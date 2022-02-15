@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 // 앱이 실행될때 1번만 실행이 됩니다.
 class ApplicationClass : Application() {
 
-    val API_URL = "https://ghibliapi.herokuapp.com/"
+    val API_URL = "https://ghibliapi.herokuapp.com"
 
 
     companion object {
