@@ -21,6 +21,5 @@ data class FilmsModelItem (
     val title: String,
     val url: String,
     val vehicles: List<String>,
-    var checked : Boolean = false,
-    var checked2 : Boolean = false
+    var checked : Boolean = false
 ) : Serializable
