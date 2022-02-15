@@ -1,6 +1,6 @@
 package com.changs.movielist.ui.adapter
 
-import android.util.Log
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -16,7 +16,6 @@ class ViewPagerAdapter (fragment : FragmentActivity) : FragmentStateAdapter(frag
             0 -> LeftFragment()
             1 -> CenterFragment()
             else -> RightFragment()
-
         }
     }
 }
