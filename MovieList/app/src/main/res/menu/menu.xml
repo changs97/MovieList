@@ -12,10 +12,6 @@
         android:icon="@drawable/free_icon_apps_sort1"
         android:title="Sort by title"/>
 
-    <item
-        android:id="@+id/menu3"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_star_border_24"
-        android:title="Favorites"/>
+
 
 </menu>

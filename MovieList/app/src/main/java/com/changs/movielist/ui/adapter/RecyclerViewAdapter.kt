@@ -17,148 +17,85 @@ import com.changs.movielist.R
 import com.changs.movielist.data.model.FilmsModelItem
 import android.util.Pair
 import android.app.Activity
+import android.graphics.Movie
 import android.util.Log
+import android.widget.CheckBox
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.changs.movielist.databinding.ListItemBinding
 import com.changs.movielist.ui.activity.SecondActivity
 import com.changs.movielist.ui.fragment.UpdateInterface
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class RecyclerViewAdapter(private val dataList : ArrayList<FilmsModelItem>, val viewType : Int): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(): ListAdapter<FilmsModelItem, RecyclerViewAdapter.MyViewHolder>(MyDiffCallback){
+
     private var positionCheck = 0
     private var isStartViewCheck = true
 
 
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
-        return ViewHolder(v)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding: ListItemBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.list_item, parent, false)
+        return MyViewHolder(binding)
     }
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemTitle.text = dataList[position].title
-        holder.itemScore.text = dataList[position].rt_score
-        holder.itemDirectorName.text = dataList[position].director
-        holder.itemDetail.text = dataList[position].description
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.bind(getItem(position))
 
-        Glide.with(holder.itemView.getContext())
-            .load(dataList[position].image)
-            .into(holder.itemImage)
+        holder.itemView.findViewById<CheckBox>(R.id.item_favorite)
+            .setOnClickListener {
+                bookMarkClickListener.onClick(it, getItem(position))
+            }
+    }
 
 
-        val animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_to_left)
 
-        if (isStartViewCheck) {
-            if (holder.adapterPosition > 5) isStartViewCheck = false
-        } else {
-            if (holder.adapterPosition > positionCheck) {
-                holder.itemView.animation = animation
-            } else {
-                holder.itemView.animation = null
+    inner class MyViewHolder(
+        private val binding: ListItemBinding,
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(movie: FilmsModelItem) {
+            binding.movie = movie
+
+
+            CoroutineScope(Dispatchers.IO).launch {
+                //해당 무비의 데이터가 null만 아니면 true
+                //북마크 취소를 하면 삭제 처리 되니깐 null
+                binding.itemFavorite.isChecked = bookMarkClickListener.setChecked(movie)
             }
         }
-        positionCheck = holder.adapterPosition
+    }
 
 
-
-        if(dataList[position].checked){
-            Log.d("테스트","${dataList[position].checked} + $viewType " )
-            Glide.with(holder.itemView.getContext())
-                .load(R.drawable.ic_baseline_star2_24)
-                .into(holder.itemFavoriteBtn)
-        }else{
-            Glide.with(holder.itemView.getContext())
-                .load(R.drawable.ic_baseline_star_24)
-                .into(holder.itemFavoriteBtn)
+    object MyDiffCallback : DiffUtil.ItemCallback<FilmsModelItem>() {
+        override fun areItemsTheSame(oldItem: FilmsModelItem, newItem: FilmsModelItem): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        holder.itemDetail.visibility = GONE
-        Glide.with(holder.itemView.getContext())
-            .load(R.drawable.ic_baseline_expand_more_24)
-            .into(holder.itemExpandBtn)
-
-
-
-
-
-
-    }
-
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
-
-
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemImage : ImageView
-        val itemTitle : TextView
-        val itemDetail : TextView
-        val itemScore : TextView
-        val itemDirectorName : TextView
-        val itemExpandBtn : ImageButton
-        val itemFavoriteBtn : ImageButton
-
-        init {
-            itemImage = itemView.findViewById(R.id.item_image)
-            itemTitle = itemView.findViewById(R.id.item_title)
-            itemDetail = itemView.findViewById(R.id.item_content)
-            itemScore = itemView.findViewById(R.id.item_score)
-            itemDirectorName = itemView.findViewById(R.id.item_directorName)
-            itemExpandBtn = itemView.findViewById(R.id.item_expand_btn)
-            itemFavoriteBtn = itemView.findViewById(R.id.item_favorite)
-
-            itemFavoriteBtn.setOnClickListener {
-                dataList[adapterPosition].checked = !dataList[adapterPosition].checked
-
-                if(dataList[adapterPosition].checked){
-                    Glide.with(itemView.getContext())
-                        .load(R.drawable.ic_baseline_star2_24)
-                        .into(itemFavoriteBtn)
-                }else{
-                    Glide.with(itemView.getContext())
-                        .load(R.drawable.ic_baseline_star_24)
-                        .into(itemFavoriteBtn) }
-            }
-
-
-            itemExpandBtn.setOnClickListener {
-                if(itemDetail.visibility == GONE){
-                    itemDetail.visibility = VISIBLE
-                    Glide.with(itemView.getContext())
-                        .load(R.drawable.ic_baseline_expand_less_24)
-                        .into(itemExpandBtn)
-                }else{
-                    itemDetail.visibility = GONE
-                    Glide.with(itemView.getContext())
-                        .load(R.drawable.ic_baseline_expand_more_24)
-                        .into(itemExpandBtn) }
-            }
-
-            itemView.setOnLongClickListener {
-                val intent = Intent(itemView.context, SecondActivity::class.java)
-
-                val options : ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    itemView.context as Activity,
-                    Pair.create(itemTitle, "titleTransition"),
-                    Pair.create(itemImage, "imageTransition")
-                )
-                intent.putExtra("SecondActivity",dataList[adapterPosition])
-                itemView.context.startActivity(intent, options.toBundle())
-
-                true
-            }
-
-            itemView.setOnClickListener{ v: View ->
-                val title : String = dataList.get(adapterPosition).title
-
-                Snackbar.make(v, "If you want to check out ${title}'s additional content, click long.",
-                    Snackbar.LENGTH_LONG).setAction("Action", null).show()
-            }
-
+        override fun areContentsTheSame(oldItem: FilmsModelItem, newItem: FilmsModelItem): Boolean {
+            return oldItem == newItem
         }
-
     }
+
+    interface ItemClickListener {
+        fun onClick(view: View, movie: FilmsModelItem)
+
+        fun setChecked(movie: FilmsModelItem): Boolean
+    }
+
+    private lateinit var bookMarkClickListener: ItemClickListener
+
+    fun setBookMarkClickListener(bookMarkClickListener: ItemClickListener) {
+        this.bookMarkClickListener = bookMarkClickListener
+    }
+
 
 
 }
