@@ -85,14 +85,14 @@ class RecyclerViewAdapter(private val onClick: (FilmsModelItem) -> Unit):
 
 
             binding.itemExpandBtn.setOnClickListener{
-                if(!binding.movie.checked){
+                if(!binding.itemExpandBtn.isChecked){
                     binding.itemContent.visibility = View.VISIBLE
 
                 }else{
                     binding.itemContent.visibility = View.GONE
 
                 }
-                binding.movie.checked = !binding.movie.checked
+                binding.itemExpandBtn.isChecked = !binding.itemExpandBtn.isChecked
             }
 
         }
