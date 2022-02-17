@@ -85,7 +85,7 @@ class LeftFragment :  Fragment() {
     private fun initObservers() {
         model.movie.observe(viewLifecycleOwner, Observer { it ->
             it?.let { leftAdapter.submitList(it.sortedByDescending {
-                it.rt_score
+                it.rt_score.toInt()
             })
             Log.d("성공",it.toString())}
         })
