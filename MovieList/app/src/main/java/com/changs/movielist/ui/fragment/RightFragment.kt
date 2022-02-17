@@ -3,6 +3,8 @@ package com.changs.movielist.ui.fragment
 
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Movie
 
 import android.os.Bundle
 import android.util.Log
@@ -57,7 +59,7 @@ class RightFragment  : Fragment() {
     }
 
     private fun initRecyclerView() {
-        rightAdapter = RecyclerViewAdapter(3)
+        rightAdapter = RecyclerViewAdapter(::itemOnClick)
         binding.rightFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
         rightAdapter.setBookMarkClickListener(object : RecyclerViewAdapter.ItemClickListener {
             override fun onClick(view: View, movie: FilmsModelItem) {
@@ -86,6 +88,15 @@ class RightFragment  : Fragment() {
             Log.d("북마크",it.toString())}
 
         })
+    }
+
+    private fun itemOnClick(movie: FilmsModelItem) {
+        startActivity(
+            Intent(activity, SecondActivity::class.java)
+                .putExtra("id", movie.id)
+                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+
+        )
     }
 
 

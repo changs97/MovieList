@@ -61,7 +61,7 @@ class CenterFragment :  Fragment() {
     }
 
     private fun initRecyclerView() {
-        centerAdapter = RecyclerViewAdapter(2)
+        centerAdapter = RecyclerViewAdapter(::itemOnClick)
         binding.centerFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
@@ -90,6 +90,14 @@ class CenterFragment :  Fragment() {
         model.movie.observe(viewLifecycleOwner, Observer { it ->
             it?.let { centerAdapter.submitList(it) }
         })
+    }
+
+    private fun itemOnClick(movie: FilmsModelItem) {
+        startActivity(
+            Intent(activity, SecondActivity::class.java)
+                .putExtra("id", movie.id)
+                .addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        )
     }
 
 
