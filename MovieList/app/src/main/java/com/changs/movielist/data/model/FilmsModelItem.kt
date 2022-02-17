@@ -40,7 +40,5 @@ data class FilmsModelItem (
 
     @ColumnInfo(name = "title")
     @SerializedName("title")
-    val title: String,
-
-    var checked : Boolean = false
+    val title: String
 ) : Serializable
