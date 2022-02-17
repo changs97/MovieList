@@ -158,7 +158,6 @@
                         android:background="@drawable/custom_checkbox2"
                         android:id="@+id/item_expand_btn"
                         android:layout_width="24dp"
-                        android:checked="@{movie.checked}"
                         android:layout_height="24dp"
                         android:button="@null" />
 
