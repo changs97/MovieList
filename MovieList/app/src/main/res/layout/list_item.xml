@@ -134,50 +134,14 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/description"
-                        android:textColor="#B2B1B9"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:background="@drawable/custom_checkbox2"
-                        android:id="@+id/item_expand_btn"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:button="@null" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
 
 
         </LinearLayout>
-
-        <TextView
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
-            android:id="@+id/item_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{movie.description}"
-            android:textColor="#2C2E43"
-            android:textSize="12sp" />
 
     </LinearLayout>
 
