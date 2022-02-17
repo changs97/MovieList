@@ -41,6 +41,7 @@ class RecyclerViewAdapter(private val onClick: (FilmsModelItem) -> Unit):
         holder.bind(current)
 
 
+
         holder.expand.setOnClickListener{
 
             Log.d("테스트","눌렸니? ${ holder.expand.isChecked}")
@@ -51,6 +52,8 @@ class RecyclerViewAdapter(private val onClick: (FilmsModelItem) -> Unit):
             }else{
                 holder.content.visibility = View.VISIBLE
             }
+
+            holder.expand.isChecked = false
 
         }
 
