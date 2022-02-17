@@ -88,7 +88,9 @@ class CenterFragment :  Fragment() {
 
     private fun initObservers() {
         model.movie.observe(viewLifecycleOwner, Observer { it ->
-            it?.let { centerAdapter.submitList(it) }
+            it?.let { centerAdapter.submitList(it.sortedByDescending {
+                it.title
+            }.reversed()) }
         })
     }
 
