@@ -41,6 +41,19 @@ class RecyclerViewAdapter(private val onClick: (FilmsModelItem) -> Unit):
         holder.bind(current)
 
 
+        holder.expand.setOnClickListener{
+
+            Log.d("테스트","눌렸니? ${ holder.expand.isChecked}")
+
+            if(!holder.expand.isChecked){
+               holder.content.visibility = View.GONE
+
+            }else{
+                holder.content.visibility = View.VISIBLE
+            }
+
+        }
+
 
         holder.itemView.findViewById<CheckBox>(R.id.item_favorite)
             .setOnClickListener {
@@ -70,6 +83,8 @@ class RecyclerViewAdapter(private val onClick: (FilmsModelItem) -> Unit):
         private val onClick: (FilmsModelItem) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
+        val expand = binding.itemExpandBtn
+        val content = binding.itemContent
 
         fun bind(movie: FilmsModelItem) {
             binding.movie = movie
@@ -84,16 +99,9 @@ class RecyclerViewAdapter(private val onClick: (FilmsModelItem) -> Unit):
             }
 
 
-            binding.itemExpandBtn.setOnClickListener{
-                if(!binding.itemExpandBtn.isChecked){
-                    binding.itemContent.visibility = View.VISIBLE
 
-                }else{
-                    binding.itemContent.visibility = View.GONE
 
-                }
-                binding.itemExpandBtn.isChecked = !binding.itemExpandBtn.isChecked
-            }
+
 
         }
 
