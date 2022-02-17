@@ -20,7 +20,7 @@ class FilmsViewModel  @Inject constructor(
     fun getMovieByRank() {
         viewModelScope.launch {
 
-            _movie.value = filmsRepository.getMovieByRank() as List<FilmsModelItem>?
+            _movie.postValue(filmsRepository.getMovieByRank() as List<FilmsModelItem>?)
 
             Log.d("성공","여긴 뷰모델 ${_movie.value}")
         }

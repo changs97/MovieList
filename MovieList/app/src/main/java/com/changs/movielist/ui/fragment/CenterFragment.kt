@@ -1,6 +1,7 @@
 package com.changs.movielist.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.changs.movielist.R
 import com.changs.movielist.data.model.FilmsModelItem
 import com.changs.movielist.data.viewmodel.FilmsViewModel
 import com.changs.movielist.databinding.FragmentCenterBinding
+import com.changs.movielist.ui.activity.SecondActivity
 
 import com.changs.movielist.ui.adapter.RecyclerViewAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +61,7 @@ class CenterFragment :  Fragment() {
     }
 
     private fun initRecyclerView() {
-        centerAdapter = RecyclerViewAdapter()
+        centerAdapter = RecyclerViewAdapter(2)
         binding.centerFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
 
 
@@ -89,4 +91,6 @@ class CenterFragment :  Fragment() {
             it?.let { centerAdapter.submitList(it) }
         })
     }
+
+
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.changs.movielist.ui.activity.SecondActivity
 import com.changs.movielist.ui.fragment.CenterFragment
 import com.changs.movielist.ui.fragment.LeftFragment
+import com.changs.movielist.ui.fragment.RightFragment
 
 import dagger.BindsInstance
 import dagger.Component
@@ -21,6 +22,6 @@ interface AppComponent {
     fun inject(fragment: LeftFragment)
     fun inject(fragment: CenterFragment)
     fun inject(activity : SecondActivity)
-    //fun inject(fragment: RightFragment)
+    fun inject(fragment: RightFragment)
 
 }

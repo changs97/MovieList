@@ -1,6 +1,7 @@
 package com.changs.movielist.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.changs.movielist.R
 import com.changs.movielist.data.model.FilmsModelItem
 import com.changs.movielist.data.viewmodel.FilmsViewModel
 import com.changs.movielist.databinding.FragmentLeftBinding
+import com.changs.movielist.ui.activity.SecondActivity
 import com.changs.movielist.ui.adapter.RecyclerViewAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +58,7 @@ class LeftFragment :  Fragment() {
     }
 
     private fun initRecyclerView() {
-        leftAdapter = RecyclerViewAdapter()
+        leftAdapter = RecyclerViewAdapter(1)
         binding.leftFragmentRecyclerView.layoutManager = LinearLayoutManager(context)
 
 

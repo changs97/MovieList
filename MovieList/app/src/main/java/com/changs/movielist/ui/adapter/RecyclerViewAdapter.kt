@@ -1,38 +1,26 @@
 package com.changs.movielist.ui.adapter
 
-import android.app.ActivityOptions
-import android.content.Intent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.changs.movielist.R
-import com.changs.movielist.data.model.FilmsModelItem
-import android.util.Pair
-import android.app.Activity
+
 import android.graphics.Movie
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.changs.movielist.R
+import com.changs.movielist.data.model.FilmsModelItem
 import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.changs.movielist.databinding.ListItemBinding
-import com.changs.movielist.ui.activity.SecondActivity
-import com.changs.movielist.ui.fragment.UpdateInterface
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class RecyclerViewAdapter(): ListAdapter<FilmsModelItem, RecyclerViewAdapter.MyViewHolder>(MyDiffCallback){
+class RecyclerViewAdapter(val viewtype : Int):
+    ListAdapter<FilmsModelItem, RecyclerViewAdapter.MyViewHolder>(MyDiffCallback){
 
     private var positionCheck = 0
     private var isStartViewCheck = true
@@ -40,6 +28,15 @@ class RecyclerViewAdapter(): ListAdapter<FilmsModelItem, RecyclerViewAdapter.MyV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
+        if(viewtype == 3){
+            Log.d("테스트","여긴 어댑터3 온크리에이트")
+        }
+        if(viewtype == 2){
+            Log.d("테스트","여긴 어댑터2 온크리에이트")
+        }
+        if(viewtype == 1){
+            Log.d("테스트","여긴 어댑터1 온크리에이트")
+        }
         val binding: ListItemBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.list_item, parent, false)
         return MyViewHolder(binding)
@@ -47,18 +44,22 @@ class RecyclerViewAdapter(): ListAdapter<FilmsModelItem, RecyclerViewAdapter.MyV
 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val current = getItem(position)
+        holder.bind(current)
+        if(viewtype == 3){
+            Log.d("테스트","여긴 어댑터3 온바인드뷰홀더")
+        }
 
         holder.itemView.findViewById<CheckBox>(R.id.item_favorite)
             .setOnClickListener {
-                bookMarkClickListener.onClick(it, getItem(position))
+                bookMarkClickListener.onClick(it, current)
             }
     }
 
 
 
     inner class MyViewHolder(
-        private val binding: ListItemBinding,
+        private val binding: ListItemBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: FilmsModelItem) {
